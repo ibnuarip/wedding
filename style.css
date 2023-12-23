@@ -450,7 +450,7 @@ footer li {
   }
 
   .mynavbar .nav-link {
-    font-size: 2rem;
+    font-size: 1.4rem;
     text-align: center;
   }
 
@@ -471,12 +471,12 @@ footer li {
   }
 
   .simply-countdown > .simply-section {
-    padding: 45px;
-    margin: 3px;
+    padding: 30px;
+    margin: 2px;
   }
 
   .timeline li .timeline-image {
-    width: 80px;
+    width: 60px;
     height: 80px;
   }
 
@@ -490,6 +490,6 @@ footer li {
   }
 
   .timeline li .timeline-panel::after {
-    top: 31px;
+    top: 3px;
   }
 }
