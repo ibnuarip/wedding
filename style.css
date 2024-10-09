@@ -472,7 +472,11 @@ footer li {
 
   .simply-countdown > .simply-section {
     padding: 30px;
+<<<<<<< HEAD
     margin: 2px;
+=======
+    margin: 1px;
+>>>>>>> e2a08ca521ef44b740f8fed9d97418e7f45b1897
   }
 
   .timeline li .timeline-image {
