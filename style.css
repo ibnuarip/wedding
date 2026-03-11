@@ -17,11 +17,10 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(img/bg-prewed.jpg);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%), url(img/bg-prewed.jpg);
   background-size: cover;
   background-position: center;
   z-index: -1;
-  filter: grayscale();
 }
 
 .hero {
@@ -62,14 +61,56 @@ body {
 .mynavbar {
   background-color: rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(4px);
+  z-index: 1030;
+  transition: z-index 0s;
 }
 
-.mynavbar .offcanvas {
+/* Lower navbar z-index when offcanvas is open so backdrop covers it */
+body.offcanvas-open .mynavbar {
+  z-index: 1 !important;
+}
+
+/* Offcanvas menu (standalone, outside nav) */
+#offcanvasNavbar {
   height: 100vh;
+  background-color: #fff;
+  z-index: 1080 !important;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
 }
 
-.mynavbar .navbar-brand,
-.mynavbar .offcanvas-title {
+#offcanvasNavbar .offcanvas-header {
+  border-bottom: 1px solid #eee;
+  padding: 1.2rem 1.5rem;
+}
+
+#offcanvasNavbar .offcanvas-title {
+  font-family: 'Sacramento', cursive;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+
+#offcanvasNavbar .offcanvas-body .nav-link {
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+  color: #333;
+  font-size: 1rem;
+}
+
+#offcanvasNavbar .offcanvas-body .nav-link:hover {
+  background-color: #f8f8f8;
+  color: var(--pink);
+}
+
+/* Offcanvas backdrop - must cover the sticky navbar */
+.offcanvas-backdrop {
+  z-index: 1070 !important;
+}
+
+.mynavbar .navbar-brand {
   font-family: 'Sacramento', cursive;
   font-size: 3.2rem;
   font-weight: bold;
@@ -386,6 +427,75 @@ footer li {
   }
 }
 
+/* Toast Notification Styles */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.custom-toast {
+  background-color: white;
+  color: #333;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  border-left: 5px solid #28a745;
+  animation: slideIn 0.5s ease forwards, fadeOut 0.5s ease 2.5s forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-toast .message {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.custom-toast .close-btn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 0 0 15px;
+  line-height: 1;
+}
+
+.custom-toast .close-btn:hover {
+  color: #333;
+}
+
+.custom-toast .progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: #28a745;
+  width: 100%;
+  animation: progress 3s linear forwards;
+}
+
+@keyframes slideIn {
+  from { translate: 100% 0; opacity: 0; }
+  to { translate: 0 0; opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
 /* Media Query */
 /* Extra large */
 @media (max-width: 1200px) {
@@ -451,11 +561,11 @@ footer li {
 
   .mynavbar .nav-link {
     font-size: 1.4rem;
-    text-align: center;
+    text-align: left;
   }
 
-  .sticky-top {
-    overflow: hidden;
+  #offcanvasNavbar {
+    max-width: 75vw;
   }
 
   .timeline li .timeline-image {
@@ -472,16 +582,16 @@ footer li {
 
   .simply-countdown > .simply-section {
     padding: 30px;
-<<<<<<< HEAD
-    margin: 2px;
-=======
     margin: 1px;
->>>>>>> e2a08ca521ef44b740f8fed9d97418e7f45b1897
   }
 
   .timeline li .timeline-image {
-    width: 60px;
-    height: 80px;
+    width: 80px !important;
+    height: 80px !important;
+    left: 20px !important;
+    margin-left: 0 !important;
+    top: 16px;
+    transform: none !important;
   }
 
   .timeline li .timeline-panel {
@@ -490,10 +600,12 @@ footer li {
   }
 
   .timeline li .timeline-panel::before {
-    top: 30px;
+    top: 46px;
+    left: -15px;
   }
 
   .timeline li .timeline-panel::after {
-    top: 3px;
+    top: 47px;
+    left: -13px;
   }
 }
